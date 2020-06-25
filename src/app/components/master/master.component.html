@@ -1,1 +1,37 @@
-<p>master works!</p>
+<h1><img src="../assets/images/logo-titulo.png"></h1>
+
+<div class="container">
+    <section class="header">
+        <div class="generations">
+        <span>What generation?</span>
+        <select class="form-control-sm" [(ngModel)]="generationSelected" 
+        (ngModelChange)="getGeneration()">
+            <option *ngFor="let generation of listGenerations; index as i" 
+            value="{{generation}}"
+            [id]="[i]">
+            {{generation}}
+            </option>
+        </select>
+        </div>
+    
+        
+        <div class="types">
+        <span>What type?</span>
+        <select class="form-control-sm" [(ngModel)]="typeSelected" 
+        (ngModelChange)="getType()"> 
+            <option *ngFor="let type of listTypes; index as i" 
+            value="{{type}}"
+            [id]="[i]">
+            {{type}}
+            </option>
+        </select>
+        </div>
+    </section>
+
+    <section class="main">
+        <div *ngFor="let pokemon of pokeFinalData">
+            <img #front src={{pokemon.sprites.front_default}}>
+            <span>{{pokemon.name}}</span>
+        </div>
+    </section>
+</div>
