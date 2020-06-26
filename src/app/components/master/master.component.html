@@ -29,9 +29,12 @@
     </section>
 
     <section class="main">
-        <div *ngFor="let pokemon of pokeFinalData" [class]="pokemon.types[0].type.name" class="pokemon">
+        <div *ngFor="let pokemon of pokeFinalData" 
+        [class]="pokemon.types[0].type.name" 
+        class="pokemon"
+        [routerLink]="'/listComplete/' + pokemon.name">
             <img #front src={{pokemon.sprites.front_default}}>
-            <span>{{pokemon.name}}</span>
+            <span>{{pokemon.name[0].toUpperCase()}}{{pokemon.name.slice(1, pokemon.name.length)}}</span>
         </div>
     </section>
 </div>

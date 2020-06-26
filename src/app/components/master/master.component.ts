@@ -9,12 +9,11 @@ import { AnyDataService } from 'src/app/any-data.service';
 })
 export class MasterComponent implements OnInit {
   ngOnInit(): void {}
+
   constructor( private dataService : AnyDataService) {
     this.getDataURL();
   }
 
-  dataURL = [];
-  pokemonsURL = [];
   pokeAllData = [];
   pokeFinalData = [];
 
@@ -25,10 +24,10 @@ export class MasterComponent implements OnInit {
   listTypes = ['All', 'normal', 'grass', 'fire', 'water', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'steel', 'fairy'];
 
   async getDataURL(): Promise<void>{
-    this.dataURL = await this.dataService.getDataURL();
-
-    for(let i=0; i<this.dataURL.length; i++){
-      await axios.get(this.dataURL[i].url)
+    const dataURL = await this.dataService.getDataURL();
+    
+    for(let i=0; i<dataURL.length; i++){
+      await axios.get(dataURL[i].url)
         .then(response => {
           this.pokeAllData.push(response.data);
           this.pokeFinalData.push(response.data);
@@ -62,7 +61,6 @@ export class MasterComponent implements OnInit {
       else{
         pokeGenData = this.pokeAllData.slice(721, 807);
       }
-      
     }
     else{
       pokeGenData = this.pokeAllData;
@@ -75,7 +73,7 @@ export class MasterComponent implements OnInit {
     
     if(this.typeSelected != 'All'){
       genData.forEach(pokemon => {
-        let filter = pokemon.types.some(type => type.type.name == this.typeSelected);
+        const filter = pokemon.types.some(type => type.type.name == this.typeSelected);
         if(filter){
           this.pokeFinalData.push(pokemon);
         }
