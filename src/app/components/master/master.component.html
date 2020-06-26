@@ -18,7 +18,7 @@
         <div class="types">
         <span>What type?</span>
         <select class="form-control-sm" [(ngModel)]="typeSelected" 
-        (ngModelChange)="getType()"> 
+        (ngModelChange)="getGeneration()"> 
             <option *ngFor="let type of listTypes; index as i" 
             value="{{type}}"
             [id]="[i]">
@@ -29,7 +29,7 @@
     </section>
 
     <section class="main">
-        <div *ngFor="let pokemon of pokeFinalData">
+        <div *ngFor="let pokemon of pokeFinalData" [class]="pokemon.types[0].type.name" class="pokemon">
             <img #front src={{pokemon.sprites.front_default}}>
             <span>{{pokemon.name}}</span>
         </div>

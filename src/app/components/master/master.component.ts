@@ -38,47 +38,51 @@ export class MasterComponent implements OnInit {
 
   getGeneration(){
     
-    this.pokeFinalData = [];
+    let pokeGenData = [];
    
     if(this.generationSelected != 'All'){
       if(this.generationSelected == 'I Gen'){
-        this.pokeFinalData = this.pokeAllData.slice(0, 151);
+        pokeGenData = this.pokeAllData.slice(0, 151);
       }
       else if(this.generationSelected == 'II Gen'){
-        this.pokeFinalData = this.pokeAllData.slice(151, 251);
+        pokeGenData = this.pokeAllData.slice(151, 251);
       }
       else if(this.generationSelected == 'III Gen'){
-        this.pokeFinalData = this.pokeAllData.slice(251, 386);
+        pokeGenData = this.pokeAllData.slice(251, 386);
       }
       else if(this.generationSelected == 'IV Gen'){
-        this.pokeFinalData = this.pokeAllData.slice(386, 493);
+        pokeGenData = this.pokeAllData.slice(386, 493);
       }
       else if(this.generationSelected == 'V Gen'){
-        this.pokeFinalData = this.pokeAllData.slice(494, 649);
+        pokeGenData = this.pokeAllData.slice(494, 649);
       }
       else if(this.generationSelected == 'VI Gen'){
-        this.pokeFinalData = this.pokeAllData.slice(649, 721);
+        pokeGenData = this.pokeAllData.slice(649, 721);
       }
       else{
-        this.pokeFinalData = this.pokeAllData.slice(721, 807);
+        pokeGenData = this.pokeAllData.slice(721, 807);
       }
       
     }
     else{
-      this.pokeFinalData = this.pokeAllData;
+      pokeGenData = this.pokeAllData;
     }
+    this.getType(pokeGenData);
   }
 
-  getType(){
+  getType(genData:any[]){
     this.pokeFinalData = [];
-    console.log(this.generationSelected);
+    
     if(this.typeSelected != 'All'){
-      this.pokeAllData.forEach(pokemon => {
+      genData.forEach(pokemon => {
         let filter = pokemon.types.some(type => type.type.name == this.typeSelected);
         if(filter){
           this.pokeFinalData.push(pokemon);
         }
       })
+    }
+    else{
+      this.pokeFinalData = genData;
     }
   }
 
